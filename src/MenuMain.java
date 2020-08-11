@@ -1,4 +1,4 @@
-import controller.PhoneBookManager;
+import service.PhoneBookManager;
 
 import java.io.IOException;
 import java.util.Scanner;

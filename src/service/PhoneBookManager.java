@@ -1,12 +1,10 @@
-package controller;
+package service;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import service.*;
 
 public class PhoneBookManager {
     Scanner scanner = new Scanner(System.in);
@@ -28,20 +26,39 @@ public class PhoneBookManager {
     }
 
     public void addContact() {
-        System.out.print("Enter a phone number: ");
-        String phoneNumber = scanner.nextLine();
+        String phoneNumber;
+        while(true) {
+            System.out.print("Enter a phone number: ");
+            phoneNumber = scanner.nextLine();
+            Pattern patternP = Pattern.compile("^\\d{10}$");
+            Matcher matcherP = patternP.matcher(phoneNumber);
+            if (matcherP.matches())
+                break;
+        }
         System.out.print("Enter a group: ");
         String group = scanner.nextLine();
         System.out.print("Enter a fullname: ");
         String fullName = scanner.nextLine();
-        System.out.print("Enter a gender: ");
-        String gender = scanner.nextLine();
+        String gender;
+        while(true) {
+            System.out.print("Enter a gender: ");
+            gender = scanner.nextLine();
+            if(gender.equals("male") || gender.equals("female"))
+                break;
+        }
         System.out.print("Enter a address: ");
         String address = scanner.nextLine();
         System.out.print("Enter a date of birth: ");
         String dateOfBirth = scanner.nextLine();
-        System.out.print("Enter a email: ");
-        String email = scanner.nextLine();
+        String email;
+        while(true) {
+            System.out.print("Enter a email: ");
+            email = scanner.nextLine();
+            Pattern patternE = Pattern.compile("^[A-Za-z0-9+_.-]+@(.+)$");
+            Matcher matcher = patternE.matcher(email);
+            if(matcher.matches())
+                break;
+        }
         Contact contact = new Contact(phoneNumber, group, fullName, gender, address, dateOfBirth, email);
         listContacts.add(contact);
     }
@@ -58,14 +75,26 @@ public class PhoneBookManager {
                     String group = scanner.nextLine();
                     System.out.print("Enter a fullname: ");
                     String fullName = scanner.nextLine();
-                    System.out.print("Enter a gender: ");
-                    String gender = scanner.nextLine();
+                    String gender;
+                    while(true) {
+                        System.out.print("Enter a gender: ");
+                        gender = scanner.nextLine();
+                        if(gender.equals("male") || gender.equals("female"))
+                            break;
+                    }
                     System.out.print("Enter a address: ");
                     String address = scanner.nextLine();
                     System.out.print("Enter a date of birth: ");
                     String dateOfBirth = scanner.nextLine();
-                    System.out.print("Enter a email: ");
-                    String email = scanner.nextLine();
+                    String email;
+                    while(true) {
+                        System.out.print("Enter a email: ");
+                        email = scanner.nextLine();
+                        Pattern patternE = Pattern.compile("^[A-Za-z0-9+_.-]+@(.+)$");
+                        Matcher matcher = patternE.matcher(email);
+                        if(matcher.matches())
+                            break;
+                    }
                     contact.setGender(gender);
                     contact.setAddress(address);
                     contact.setGroup(group);
@@ -82,10 +111,14 @@ public class PhoneBookManager {
         }
     }
     public void findContact() {
-        System.out.println("Enter phone number or full name you want to find: ");
-        String text = scanner.nextLine();
-        Pattern pattern = Pattern.compile("(.*?)"+text+"(.*?)");
-        Matcher matcher = pattern.matcher(listContacts.toString());
+        System.out.println("Enter phone number:");
+        String phoneNumber = scanner.nextLine();
+        for(Contact contact : listContacts){
+            if(contact.getPhoneNumber().equals(phoneNumber)){
+                System.out.println(contact);
+                break;
+            }
+        }
     }
     public void deleteContact() {
         System.out.print("Enter your phone number you want to delete: ");
