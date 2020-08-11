@@ -67,7 +67,7 @@ public class PhoneBookManager {
         System.out.println("Enter your phone number you want to edit: ");
         String phoneNumber = scanner.nextLine();
         boolean havePhoneNumber =false;
-        while (!phoneNumber.equals("\n")) {
+        while (!phoneNumber.equals("")) {
             for (Contact contact : listContacts) {
                 if (contact.getPhoneNumber().equals(phoneNumber)) {
                     havePhoneNumber = true;
@@ -124,7 +124,7 @@ public class PhoneBookManager {
         System.out.print("Enter your phone number you want to delete: ");
         String phoneNumber = scanner.nextLine();
         boolean havePhoneNumber =false;
-        while (!phoneNumber.equals("\n")) {
+        while (!phoneNumber.equals("")) {
             for (Contact contact : listContacts) {
                 if (contact.getPhoneNumber().equals(phoneNumber)){
                     System.out.println("Are you sure want to delete this contact ? Y (for yes)?");
