@@ -37,7 +37,11 @@ public class MenuMain {
                     PhoneBookManager.getInstance().findContact();
                     break;
                 case 6:
-                    PhoneBookManager.getInstance();
+                    try {
+                        PhoneBookManager.getInstance().readFile();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     break;
                 case 7:
                     try {
